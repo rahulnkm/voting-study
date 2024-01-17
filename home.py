@@ -79,4 +79,6 @@ def graphql_query():
         print(f"Error: {response.status_code}")
         print(response.text)
 
-st.write(graphql_query())
+
+if st.button("test"):
+    st.write(graphql_query())
