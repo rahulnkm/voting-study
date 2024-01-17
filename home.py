@@ -21,32 +21,62 @@ Return a list of Farcaster eth addresses, the social media posts they made, and 
 
 '''
 
+import requests
+import json
 
+def graphql_query():
+    # GraphQL query
+    graphql_query = """
+    query {
+    votes (
+        first: 10
+        skip: 0
+        where: {
+        proposal: "QmPvbwguLfcVryzBRrbY4Pb9bCtxURagdv1XjhtFLf3wHj"
+        }
+        orderBy: "created",
+        orderDirection: desc
+    ) {
+        id
+        voter
+        vp
+        vp_by_strategy
+        vp_state
+        created
+        proposal {
+        id
+        }
+        choice
+        space {
+        id
+        }
+    }
+    }
+    """
 
-"""
-query {
-  votes (
-    first: 1000
-    skip: 0
-    where: {
-      proposal: "QmPvbwguLfcVryzBRrbY4Pb9bCtxURagdv1XjhtFLf3wHj"
+    # GraphQL endpoint URL
+    url = "https://hub.snapshot.org/graphql"
+
+    # Request headers
+    headers = {
+        "Content-Type": "application/json",
+        # "Authorization": "Bearer YOUR_ACCESS_TOKEN"
     }
-    orderBy: "created",
-    orderDirection: desc
-  ) {
-    id
-    voter
-    vp
-    vp_by_strategy
-    vp_state
-    created
-    proposal {
-      id
-    }
-    choice
-    space {
-      id
-    }
-  }
-}
-"""
+
+    # Request payload
+    payload = json.dumps({"query": graphql_query})
+
+    # Send the request
+    response = requests.post(url, headers=headers, data=payload)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Process successful response
+        data = response.json()
+        print(data)
+    else:
+        # Handle errors
+        print(f"Error: {response.status_code}")
+        print(response.text)
+
+st.write(graphql_query())
