@@ -1,7 +1,5 @@
 import streamlit as st
 
-st.write('whats up')
-
 '''
 1. Create an array of voters, social media posts, and votes
     - Find active Farcaster users that have been active on Snapshot ()
@@ -22,3 +20,33 @@ Collect social media posts of Farcaster and Snapshot users,
 Return a list of Farcaster eth addresses, the social media posts they made, and the votes they made 
 
 '''
+
+
+
+"""
+query {
+  votes (
+    first: 1000
+    skip: 0
+    where: {
+      proposal: "QmPvbwguLfcVryzBRrbY4Pb9bCtxURagdv1XjhtFLf3wHj"
+    }
+    orderBy: "created",
+    orderDirection: desc
+  ) {
+    id
+    voter
+    vp
+    vp_by_strategy
+    vp_state
+    created
+    proposal {
+      id
+    }
+    choice
+    space {
+      id
+    }
+  }
+}
+"""
