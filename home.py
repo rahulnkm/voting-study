@@ -1,6 +1,6 @@
 import streamlit as st
 
-'whats up'
+st.write('whats up')
 
 '''
 1. Create an array of voters, social media posts, and votes
