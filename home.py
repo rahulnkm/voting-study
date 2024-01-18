@@ -44,24 +44,20 @@ def snapshot_voters_list():
                 }        
         }
     """
-    # GraphQL endpoint URL
+
     url = "https://hub.snapshot.org/graphql"
-    # Request headers
     headers = {
         "Content-Type": "application/json",
         # "Authorization": "Bearer YOUR_ACCESS_TOKEN"
     }
-    # Request payload
+    
     payload = json.dumps({"query": graphql_query})
-    # Send the request
     response = requests.post(url, headers=headers, data=payload)
-    # Check if the request was successful
+    
     if response.status_code == 200:
-        # Process successful response
         data = response.json()
         return data["data"]["votes"]
     else:
-        # Handle errors
         return f"Error: {response.status_code} {response.text}"
 
 def farcaster_lookup(id):
@@ -91,6 +87,8 @@ def farcaster_lookup(id):
         return f"Error: {response.status_code}"
 
 def farcaster_snapshot_list():
+
+    return farcaster_lookup("0x05f1F8c8D2212a6EE51d0aB8bd53558B0Db9eEf9")
 
     address_list = snapshot_voters_list()
 
