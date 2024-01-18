@@ -8,12 +8,13 @@ import streamlit as st
 
 For all the spaces on Snapshot,
 Review all the proposals in each Space,
-Collect the Ethereum addresses of each of the voters,
+Collect the Ethereum addresses of each of the voters
+Collect a list of all active Ethereum addresses on Snapshot
 
 For all active Farcaster users,
 Collect the active Farcaster user eth addresses,
 Compare the voters addresses to active Farcaster eth addresses,
-Collect a list of Farcaster users with 
+Collect a list of Farcaster users with active Snapshot activity
 
 Collect social media posts of Farcaster and Snapshot users,
 
@@ -39,20 +40,8 @@ def get_all_voters_and_ids():
                 orderDirection: desc
                 )
                 {
-                    id
                     voter
-                    vp
-                    vp_by_strategy
-                    vp_state
-                    created
-                    proposal {
-                    id
-                    }
-                    choice
-                    space {
-                    id
-                }
-            }
+                }        
         }
     """
 
@@ -79,6 +68,10 @@ def get_all_voters_and_ids():
     else:
         # Handle errors
         return f"Error: {response.status_code} {response.text}"
+
+
+def get_farcaster_from_eth_address():
+
 
 
 if st.button("test"):
