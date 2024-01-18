@@ -8,18 +8,18 @@ import streamlit as st
 
 For all the spaces on Snapshot,
 Review all the proposals in each Space,
-Collect the Ethereum addresses of each of the voters
-Collect a list of all active Ethereum addresses on Snapshot
+Collect the Ethereum addresses of each of the voters,
+Collect a list of all Ethereum addresses on Snapshot
 
-For all active Farcaster users,
-Collect the active Farcaster user eth addresses,
-Compare the voters addresses to active Farcaster eth addresses,
-Collect a list of Farcaster users with active Snapshot activity
+Search for Farcaster users that have same Ethereum address
+Collect a list of Farcaster users that have been active on Snapshot
 
-Collect social media posts of Farcaster and Snapshot users,
+Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
+- How many posts have they made? Over 10?
+- How many proposals have they voted on? Over 10?
 
-Return a list of Farcaster eth addresses, the social media posts they made, and the votes they made 
-
+Collect social media posts of active Farcaster and Snapshot users
+Collect votes of active Farcaster and Snapshot users
 '''
 
 import requests
@@ -70,7 +70,7 @@ def get_all_voters_and_ids():
         return f"Error: {response.status_code} {response.text}"
 
 
-def get_farcaster_from_eth_address():
+def get_farcaster_from_eth_address(address_list):
     return None
 
 
