@@ -90,7 +90,9 @@ def farcaster_lookup(id):
         # Handle errors
         return f"Error: {response.status_code}"
 
-def farcaster_snapshot_list(address_list):
+def farcaster_snapshot_list():
+
+    address_list = snapshot_voters_list()
 
     farcaster_snapshot_list = []
 
@@ -102,4 +104,4 @@ def farcaster_snapshot_list(address_list):
 
 if st.button("test"):
     # st.write(snapshot_voters_list())
-    st.write(farcaster_lookup())
+    st.write(farcaster_snapshot_list())
