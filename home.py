@@ -44,22 +44,17 @@ def snapshot_voters_list():
                 }        
         }
     """
-
     # GraphQL endpoint URL
     url = "https://hub.snapshot.org/graphql"
-
     # Request headers
     headers = {
         "Content-Type": "application/json",
         # "Authorization": "Bearer YOUR_ACCESS_TOKEN"
     }
-
     # Request payload
     payload = json.dumps({"query": graphql_query})
-
     # Send the request
     response = requests.post(url, headers=headers, data=payload)
-
     # Check if the request was successful
     if response.status_code == 200:
         # Process successful response
@@ -69,10 +64,42 @@ def snapshot_voters_list():
         # Handle errors
         return f"Error: {response.status_code} {response.text}"
 
+def farcaster_lookup(id):
+    # Farcaster API endpoint for profiles
+    api_endpoint = "https://searchcaster.xyz/api/profiles"
 
-def get_farcaster_from_eth_address(address_list):
-    return None
+    # Parameters for the API call
+    params = {
+        "connected_address": id
+    }
 
+    # Make the GET request
+    response = requests.get(api_endpoint, params=params)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the response JSON
+        profiles = response.json()
+
+        # Check if a profile is associated with the Ethereum address
+        if profiles:
+            return "Farcaster profile found:", profiles
+        else:
+            return "No Farcaster profile associated with this Ethereum address."
+    else:
+        # Handle errors
+        return f"Error: {response.status_code}"
+
+def farcaster_snapshot_list(address_list):
+
+    farcaster_snapshot_list = []
+
+    for voter_id in address_list:
+        if farcaster_lookup(voter_id) != False:
+            farcaster_snapshot_list.append(voter_id)
+    
+    return farcaster_snapshot_list
 
 if st.button("test"):
-    st.write(snapshot_voters_list())
+    # st.write(snapshot_voters_list())
+    st.write(farcaster_lookup())
