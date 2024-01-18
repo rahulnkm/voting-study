@@ -88,7 +88,7 @@ def farcaster_lookup(id):
 
 def farcaster_snapshot_list():
 
-    return farcaster_lookup("0x05f1F8c8D2212a6EE51d0aB8bd53558B0Db9eEf9")
+    return farcaster_lookup("0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15")
 
     address_list = snapshot_voters_list()
 
