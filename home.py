@@ -24,34 +24,36 @@ Return a list of Farcaster eth addresses, the social media posts they made, and 
 import requests
 import json
 
-def graphql_query():
+
+def get_all_voters_and_ids():
     # GraphQL query
     graphql_query = """
     query {
-    votes (
-        first: 10
-        skip: 0
-        where: {
-        proposal: "QmPvbwguLfcVryzBRrbY4Pb9bCtxURagdv1XjhtFLf3wHj"
+        votes (
+            first: 10
+            skip: 0
+            where: {
+                proposal: "QmPvbwguLfcVryzBRrbY4Pb9bCtxURagdv1XjhtFLf3wHj"
+                }
+                orderBy: "created",
+                orderDirection: desc
+                )
+                {
+                    id
+                    voter
+                    vp
+                    vp_by_strategy
+                    vp_state
+                    created
+                    proposal {
+                    id
+                    }
+                    choice
+                    space {
+                    id
+                }
+            }
         }
-        orderBy: "created",
-        orderDirection: desc
-    ) {
-        id
-        voter
-        vp
-        vp_by_strategy
-        vp_state
-        created
-        proposal {
-        id
-        }
-        choice
-        space {
-        id
-        }
-    }
-    }
     """
 
     # GraphQL endpoint URL
@@ -73,12 +75,11 @@ def graphql_query():
     if response.status_code == 200:
         # Process successful response
         data = response.json()
-        print(data)
+        return data
     else:
         # Handle errors
-        print(f"Error: {response.status_code}")
-        print(response.text)
+        return f"Error: {response.status_code} {response.text}"
 
 
 if st.button("test"):
-    st.write(graphql_query())
+    st.write(get_all_voters_and_ids())
