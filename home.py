@@ -33,7 +33,7 @@ def get_all_voters_and_ids():
             first: 10
             skip: 0
             where: {
-                proposal: "QmPvbwguLfcVryzBRrbY4Pb9bCtxURagdv1XjhtFLf3wHj"
+                space: "lido-snapshot.eth"
                 }
                 orderBy: "created",
                 orderDirection: desc
