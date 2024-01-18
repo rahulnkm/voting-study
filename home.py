@@ -71,7 +71,7 @@ def get_all_voters_and_ids():
 
 
 def get_farcaster_from_eth_address():
-
+    return None
 
 
 if st.button("test"):
