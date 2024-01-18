@@ -26,7 +26,7 @@ import requests
 import json
 
 
-def get_all_voters_and_ids():
+def snapshot_voters_list():
     # GraphQL query
     graphql_query = """
     query {
@@ -64,7 +64,7 @@ def get_all_voters_and_ids():
     if response.status_code == 200:
         # Process successful response
         data = response.json()
-        return data
+        return data["data"]["votes"]
     else:
         # Handle errors
         return f"Error: {response.status_code} {response.text}"
@@ -75,4 +75,4 @@ def get_farcaster_from_eth_address(address_list):
 
 
 if st.button("test"):
-    st.write(get_all_voters_and_ids())
+    st.write(snapshot_voters_list())
