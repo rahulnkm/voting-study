@@ -89,6 +89,7 @@ def farcaster_snapshot_list():
 
 
 snapshot_farcaster = farcaster_snapshot_list()
+voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
 
 '''
 Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
@@ -120,6 +121,5 @@ def get_farcaster_posts(id):
 
 
 
-
 # st.write(snapshot_voters_list())
-st.write(get_farcaster_posts(snapshot_farcaster[0]))
+st.write(get_farcaster_posts(voter))
