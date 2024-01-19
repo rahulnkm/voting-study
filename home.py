@@ -70,7 +70,7 @@ def users():
     return verified
 
 
-snapshot_farcaster = farcaster_snapshot_list()
+snapshot_farcaster = users()
 voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
 
 '''
