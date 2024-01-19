@@ -87,6 +87,9 @@ def farcaster_snapshot_list():
 
     return verified
 
+
+snapshot_farcaster = farcaster_snapshot_list()
+
 '''
 Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
 - How many posts have they made? Over 10?
@@ -97,5 +100,26 @@ Collect votes of active Farcaster and Snapshot users
 '''
 
 
+def get_farcaster_posts(id):
+    # Farcaster API endpoint for profiles
+    api_endpoint = "https://searchcaster.xyz/api/profiles"
+
+    # Parameters for the API call
+    params = {
+        "connected_address": id
+    }
+
+    # Make the GET request
+    response = requests.get(api_endpoint, params=params)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the response JSON
+        profiles = response.json()
+        return profiles
+
+
+
+
 # st.write(snapshot_voters_list())
-st.write(farcaster_snapshot_list())
+st.write(get_farcaster_posts(snapshot_farcaster[0]))
