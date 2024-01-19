@@ -104,4 +104,4 @@ def get_farcaster_posts(id):
 
 
 # st.write(snapshot_voters_list())
-st.write(get_farcaster_posts(voter))
+st.write(check_farcaster_profile(voter))
