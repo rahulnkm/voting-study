@@ -60,7 +60,7 @@ def snapshot_voters_list():
     else:
         return f"Error: {response.status_code} {response.text}"
 
-def farcaster_lookup(id):
+def check_farcaster_profile(id):
     # Farcaster API endpoint for profiles
     api_endpoint = "https://searchcaster.xyz/api/profiles"
 
@@ -88,7 +88,7 @@ def farcaster_lookup(id):
 
 def farcaster_snapshot_list():
 
-    return farcaster_lookup("0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15")
+    return farcaster_lookup("0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15") # works
 
     address_list = snapshot_voters_list()
 
@@ -100,6 +100,6 @@ def farcaster_snapshot_list():
     
     return farcaster_snapshot_list
 
-if st.button("test"):
-    # st.write(snapshot_voters_list())
-    st.write(farcaster_snapshot_list())
+
+# st.write(snapshot_voters_list())
+st.write(farcaster_snapshot_list())
