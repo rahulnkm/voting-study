@@ -1,30 +1,14 @@
 import streamlit as st
+import requests
+import json
+
 
 '''
-1. Create an array of voters, social media posts, and votes
-    - Find active Farcaster users that have been active on Snapshot ()
-2.
-
-
 For all the spaces on Snapshot,
 Review all the proposals in each Space,
 Collect the Ethereum addresses of each of the voters,
 Collect a list of all Ethereum addresses on Snapshot
-
-Search for Farcaster users that have same Ethereum address
-Collect a list of Farcaster users that have been active on Snapshot
-
-Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
-- How many posts have they made? Over 10?
-- How many proposals have they voted on? Over 10?
-
-Collect social media posts of active Farcaster and Snapshot users
-Collect votes of active Farcaster and Snapshot users
 '''
-
-import requests
-import json
-
 
 def snapshot_voters_list():
     # GraphQL query
@@ -59,6 +43,11 @@ def snapshot_voters_list():
         return data["data"]["votes"]
     else:
         return f"Error: {response.status_code} {response.text}"
+
+'''
+Search for Farcaster users that have same Ethereum address
+Collect a list of Farcaster users that have been active on Snapshot
+'''
 
 def check_farcaster_profile(id):
     # Farcaster API endpoint for profiles
@@ -98,6 +87,16 @@ def farcaster_snapshot_list():
             verified.append(id)
 
     return verified
+
+'''
+Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
+- How many posts have they made? Over 10?
+- How many proposals have they voted on? Over 10?
+
+Collect social media posts of active Farcaster and Snapshot users
+Collect votes of active Farcaster and Snapshot users
+'''
+
 
 # st.write(snapshot_voters_list())
 st.write(farcaster_snapshot_list())
