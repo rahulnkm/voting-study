@@ -2,7 +2,6 @@ import streamlit as st
 import requests
 import json
 
-
 '''
 For all the spaces on Snapshot,
 Review all the proposals in each Space,
