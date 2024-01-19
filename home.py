@@ -9,8 +9,7 @@ Collect the Ethereum addresses of each of the voters,
 Collect a list of all Ethereum addresses on Snapshot
 '''
 
-def snapshot_voters_list():
-    # GraphQL query
+def voters_list():
     graphql_query = """
     query {
         votes (
@@ -27,16 +26,13 @@ def snapshot_voters_list():
                 }        
         }
     """
-
     url = "https://hub.snapshot.org/graphql"
     headers = {
         "Content-Type": "application/json",
         # "Authorization": "Bearer YOUR_ACCESS_TOKEN"
     }
-    
     payload = json.dumps({"query": graphql_query})
     response = requests.post(url, headers=headers, data=payload)
-    
     if response.status_code == 200:
         data = response.json()
         return data["data"]["votes"]
@@ -45,46 +41,32 @@ def snapshot_voters_list():
 
 '''
 Search for Farcaster users that have same Ethereum address
+Collect the associated usernames for the addresses
 Collect a list of Farcaster users that have been active on Snapshot
 '''
 
 def check_farcaster_profile(id):
-    # Farcaster API endpoint for profiles
     api_endpoint = "https://searchcaster.xyz/api/profiles"
-
-    # Parameters for the API call
     params = {
         "connected_address": id
     }
-
-    # Make the GET request
     response = requests.get(api_endpoint, params=params)
-
-    # Check if the request was successful
     if response.status_code == 200:
-        # Parse the response JSON
         profiles = response.json()
-
-        # Check if a profile is associated with the Ethereum address
         if profiles:
             return "Farcaster profile found:", profiles
         else:
             return "No Farcaster profile associated with this Ethereum address."
     else:
-        # Handle errors
         return f"Error: {response.status_code}"
 
-def farcaster_snapshot_list():
-
+def users():
     voters = snapshot_voters_list()
-
     verified = []
-
     for voter in voters:
         id = voter["voter"]
         if check_farcaster_profile(id) != "No Farcaster profile associated with this Ethereum address.":
             verified.append(id)
-
     return verified
 
 
@@ -103,11 +85,11 @@ Collect votes of active Farcaster and Snapshot users
 
 def get_farcaster_posts(id):
     # Farcaster API endpoint for profiles
-    api_endpoint = "https://searchcaster.xyz/api/profiles"
+    api_endpoint = "https://searchcaster.xyz/api/search"
 
     # Parameters for the API call
     params = {
-        "connected_address": id
+        "username": id
     }
 
     # Make the GET request
@@ -122,4 +104,4 @@ def get_farcaster_posts(id):
 
 
 # st.write(snapshot_voters_list())
-st.write(get_farcaster_posts(voter))
+st.write(check_farcaster_profile(voter))
