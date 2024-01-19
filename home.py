@@ -45,7 +45,7 @@ Collect the associated usernames for the addresses
 Collect a list of Farcaster users that have been active on Snapshot
 '''
 
-snapshot_farcaster = farcaster_snapshot_list()
+# snapshot_farcaster = farcaster_snapshot_list()
 voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
 
 def check_farcaster_profile(id):
