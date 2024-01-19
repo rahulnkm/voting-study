@@ -90,22 +90,14 @@ def farcaster_snapshot_list():
 
     voters = snapshot_voters_list()
 
+    verified = []
+
     for voter in voters:
         id = voter["voter"]
-        return check_farcaster_profile(id)
+        if check_farcaster_profile(id) != "No Farcaster profile associated with this Ethereum address.":
+            verified.append(id)
 
-    return check_farcaster_profile("0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15") # works
-
-    address_list = snapshot_voters_list()
-
-    farcaster_snapshot_list = []
-
-    for voter_id in address_list:
-        if farcaster_lookup(voter_id) != False:
-            farcaster_snapshot_list.append(voter_id)
-    
-    return farcaster_snapshot_list
-
+    return verified
 
 # st.write(snapshot_voters_list())
 st.write(farcaster_snapshot_list())
