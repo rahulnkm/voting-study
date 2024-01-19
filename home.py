@@ -9,7 +9,7 @@ Collect the Ethereum addresses of each of the voters,
 Collect a list of all Ethereum addresses on Snapshot
 '''
 
-def voters_list():
+def snapshot_voters_list():
     graphql_query = """
     query {
         votes (
@@ -60,7 +60,7 @@ def check_farcaster_profile(id):
     else:
         return f"Error: {response.status_code}"
 
-def users():
+def farcaster_snapshot_list():
     voters = snapshot_voters_list()
     verified = []
     for voter in voters:
@@ -70,7 +70,7 @@ def users():
     return verified
 
 
-snapshot_farcaster = users()
+snapshot_farcaster = farcaster_snapshot_list()
 voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
 
 '''
@@ -104,4 +104,4 @@ def get_farcaster_posts(id):
 
 
 # st.write(snapshot_voters_list())
-st.write(check_farcaster_profile(voter))
+st.write(get_farcaster_posts(voter))
