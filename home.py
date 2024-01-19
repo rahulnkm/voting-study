@@ -91,7 +91,8 @@ def farcaster_snapshot_list():
     voters = snapshot_voters_list()
 
     for voter in voters:
-        return voter["voter"]
+        id = voter["voter"]
+        return check_farcaster_profile(id)
 
     return check_farcaster_profile("0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15") # works
 
