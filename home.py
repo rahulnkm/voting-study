@@ -2,42 +2,67 @@ import streamlit as st
 import requests
 import json
 
+import requests
+import json
 
 def snapshot_voters_list():
+    # Read all spaces from the file
+    with open("spaces.txt", "r") as file:
+        spaces = file.readlines()
 
-    spaces = open("spaces.txt", "r").read()
+    # Remove any newline characters from each space
+    spaces = [space.strip() for space in spaces]
 
-    # For all spaces on Snapshot, get all voters
-    # Collect Ethereum addresses for all voters
+    return spaces
 
-    graphql_query = """
-    query {
-        votes (
-            first: 1000
-            skip: 0
-            where: {
-                space: "lido-snapshot.eth"
+    # Initialize a list to collect voters from all spaces
+    all_voters = []
+
+    for space in spaces:
+        # GraphQL query with variable
+        graphql_query = """
+        query GetVotes($spaceId: String!) {
+            votes (
+                first: 1000
+                skip: 0
+                where: {
+                    space: $spaceId
                 }
                 orderBy: "created",
                 orderDirection: desc
-                )
-                {
-                    voter
-                }        
+            ) {
+                voter
+            }        
         }
-    """
-    url = "https://hub.snapshot.org/graphql"
-    headers = {
-        "Content-Type": "application/json",
-        # "Authorization": "Bearer YOUR_ACCESS_TOKEN"
-    }
-    payload = json.dumps({"query": graphql_query})
-    response = requests.post(url, headers=headers, data=payload)
-    if response.status_code == 200:
-        data = response.json()
-        return data["data"]["votes"]
-    else:
-        return f"Error: {response.status_code} {response.text}"
+        """
+        url = "https://hub.snapshot.org/graphql"
+        headers = {
+            "Content-Type": "application/json",
+            # "Authorization": "Bearer YOUR_ACCESS_TOKEN" (Uncomment and use if you have a token)
+        }
+
+        # Structuring the payload with the query and variables
+        payload = {
+            "query": graphql_query,
+            "variables": {
+                "spaceId": space
+            }
+        }
+
+        response = requests.post(url, headers=headers, json=payload)  # Note: using json=payload for proper formatting
+
+        if response.status_code == 200:
+            data = response.json()
+            voters = data["data"]["votes"]
+            all_voters.extend(voters)
+        else:
+            print(f"Error fetching data for space {space}: {response.status_code} {response.text}")
+
+    return all_voters
+
+# Example usage
+voters_list = snapshot_voters_list()
+print(voters_list)
 
 
 # snapshot_farcaster = farcaster_snapshot_list()
