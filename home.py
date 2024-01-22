@@ -10,13 +10,10 @@ def snapshot_voters_list():
     # Read all spaces from the file
     with open("spaces.txt", "r") as file:
         spaces = file.readlines()
-
     # Remove any newline characters from each space
     spaces = [space.strip() for space in spaces]
-
     # Initialize a list to collect voters from all spaces
     all_voters = []
-
     for space in spaces:
         # GraphQL query with variable
         graphql_query = """
@@ -39,7 +36,6 @@ def snapshot_voters_list():
             "Content-Type": "application/json",
             # "Authorization": "Bearer YOUR_ACCESS_TOKEN" (Uncomment and use if you have a token)
         }
-
         # Structuring the payload with the query and variables
         payload = {
             "query": graphql_query,
@@ -47,25 +43,28 @@ def snapshot_voters_list():
                 "spaceId": space
             }
         }
-
         response = requests.post(url, headers=headers, json=payload)  # Note: using json=payload for proper formatting
-
         if response.status_code == 200:
             data = response.json()
             voters = data["data"]["votes"]
             all_voters.extend(voters)
         else:
             print(f"Error fetching data for space {space}: {response.status_code} {response.text}")
-
     return all_voters
 
-# Example usage
-voters_list = snapshot_voters_list()
-print(voters_list)
+@st.cache_data
+def remove_duplicate_voters(voters_list):
+    unique_voters = []
+    seen_addresses = set()
+
+    for voter in voters_list:
+        if voter["voter"] not in seen_addresses:
+            unique_voters.append(voter)
+            seen_addresses.add(voter["voter"])
+
+    return unique_voters
 
 
-# snapshot_farcaster = farcaster_snapshot_list()
-voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
 
 def check_farcaster_profile(id):
 
@@ -132,5 +131,5 @@ def get_farcaster_posts(id):
 
 
 
-st.write(snapshot_voters_list())
+st.write(remove_duplicate_voters(snapshot_voters_list()))
 # st.write(check_farcaster_profile(voter))
