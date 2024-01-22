@@ -10,6 +10,10 @@ Collect a list of all Ethereum addresses on Snapshot
 '''
 
 def snapshot_voters_list():
+
+    # For all spaces on Snapshot, get all voters
+    # Collect Ethereum addresses for all voters
+
     graphql_query = """
     query {
         votes (
@@ -49,6 +53,10 @@ Collect a list of Farcaster users that have been active on Snapshot
 voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
 
 def check_farcaster_profile(id):
+
+    # For all voters, check if they have a Farcaster account
+    # Return all Ethereum addresses of voters with Farcaster accounts 
+
     api_endpoint = "https://searchcaster.xyz/api/profiles"
     params = {
         "connected_address": id
@@ -64,6 +72,11 @@ def check_farcaster_profile(id):
         return f"Error: {response.status_code}"
 
 def farcaster_snapshot_list():
+
+    # For all Ethereum addresses of voters with Farcaster accounts
+    # Return all social media posts, count of social media posts, and count of votes on Snapshot
+    # Rank the voters by cumulative activity
+
     voters = snapshot_voters_list()
     verified = []
     for voter in voters:
