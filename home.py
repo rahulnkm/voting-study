@@ -13,7 +13,7 @@ def snapshot_voters_list():
     graphql_query = """
     query {
         votes (
-            first: 20
+            first: 1000
             skip: 0
             where: {
                 space: "lido-snapshot.eth"
