@@ -78,14 +78,16 @@ def farcaster_snapshot_list():
             verified.append(id)
     return verified
 
-'''
-Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
-- How many posts have they made? Over 10?
-- How many proposals have they voted on? Over 10?
+def rank_list():
+    
+    # Rank the Farcaster and Snapshot users by their activity on Farcaster and Snapshot
+    # - How many posts have they made? Over 10?
+    # - How many proposals have they voted on? Over 10?
 
-Collect social media posts of active Farcaster and Snapshot users
-Collect votes of active Farcaster and Snapshot users
-'''
+    # Collect social media posts of active Farcaster and Snapshot users
+    # Collect votes of active Farcaster and Snapshot users
+
+    return ranked_list
 
 
 def get_farcaster_posts(id):
@@ -108,5 +110,5 @@ def get_farcaster_posts(id):
 
 
 
-# st.write(snapshot_voters_list())
-st.write(check_farcaster_profile(voter))
+st.write(snapshot_voters_list())
+# st.write(check_farcaster_profile(voter))
