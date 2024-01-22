@@ -5,7 +5,7 @@ import json
 
 def snapshot_voters_list():
 
-    spaces = open("spaces.txt", "r")
+    spaces = open("spaces.txt", "r").read()
 
     return spaces
 
