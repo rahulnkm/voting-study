@@ -64,11 +64,9 @@ def remove_duplicate_voters(voters_list):
 
     return unique_voters
 
-@st.cache_data
-voters = snapshot_voters_list()
+# voters = snapshot_voters_list()
 
-@st.cache_data
-unique_voters = remove_duplicate_voters(voters)
+# gunique_voters = remove_duplicate_voters(voters)
 
 def check_farcaster_profile(id):
 
