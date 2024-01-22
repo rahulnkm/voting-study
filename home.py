@@ -63,16 +63,6 @@ def check_farcaster_profile(id):
     else:
         return f"Error: {response.status_code}"
 
-# Assuming the 'voter' variable holds the response
-_, profile_list = voter  # Unpacking the tuple
-
-# Check if the profile list is not empty
-if profile_list:
-    first_profile = profile_list[0]  # Get the first profile in the list
-    username = first_profile.get('body', {}).get('username', 'Username not found')
-else:
-    username = 'No profiles found'
-
 def farcaster_snapshot_list():
     voters = snapshot_voters_list()
     verified = []
