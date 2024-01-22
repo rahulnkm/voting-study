@@ -5,11 +5,9 @@ import json
 
 def snapshot_voters_list():
 
-    spaces = ["lido-snapshot.eth", "stgdao.eth", "arbitrumfoundation.eth",
-    "aave.eth", "opcollective.eth", "cakevote.eth", "uniswapgovernance.eth",
-    "metislayer2.eth", "aavegotchi.eth", "gitcoindao.eth", "gmx.eth", "ens.eth",
-    "snapshot.dcl.eth", "radiantcapital.eth", "apecoin.eth",
-    "gal.eth"]
+    spaces = open("spaces.txt", "r")
+
+    return spaces
 
     # For all spaces on Snapshot, get all voters
     # Collect Ethereum addresses for all voters
