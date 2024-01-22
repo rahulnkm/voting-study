@@ -2,14 +2,14 @@ import streamlit as st
 import requests
 import json
 
-'''
-For all the spaces on Snapshot,
-Review all the proposals in each Space,
-Collect the Ethereum addresses of each of the voters,
-Collect a list of all Ethereum addresses on Snapshot
-'''
 
 def snapshot_voters_list():
+
+    spaces = ["lido-snapshot.eth", "stgdao.eth", "arbitrumfoundation.eth",
+    "aave.eth", "opcollective.eth", "cakevote.eth", "uniswapgovernance.eth",
+    "metislayer2.eth", "aavegotchi.eth", "gitcoindao.eth", "gmx.eth", "ens.eth",
+    "snapshot.dcl.eth", "radiantcapital.eth", "apecoin.eth",
+    "gal.eth"]
 
     # For all spaces on Snapshot, get all voters
     # Collect Ethereum addresses for all voters
@@ -43,11 +43,6 @@ def snapshot_voters_list():
     else:
         return f"Error: {response.status_code} {response.text}"
 
-'''
-Search for Farcaster users that have same Ethereum address
-Collect the associated usernames for the addresses
-Collect a list of Farcaster users that have been active on Snapshot
-'''
 
 # snapshot_farcaster = farcaster_snapshot_list()
 voter = "0x45CcFE16bC2AC8CEF704a7236fEf3E5f4222dE15" #snapshot_farcaster[0]
