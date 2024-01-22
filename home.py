@@ -7,8 +7,6 @@ def snapshot_voters_list():
 
     spaces = open("spaces.txt", "r").read()
 
-    return spaces
-
     # For all spaces on Snapshot, get all voters
     # Collect Ethereum addresses for all voters
 
