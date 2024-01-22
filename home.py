@@ -13,8 +13,6 @@ def snapshot_voters_list():
     # Remove any newline characters from each space
     spaces = [space.strip() for space in spaces]
 
-    return spaces
-
     # Initialize a list to collect voters from all spaces
     all_voters = []
 
