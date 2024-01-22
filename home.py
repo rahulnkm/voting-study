@@ -5,6 +5,7 @@ import json
 import requests
 import json
 
+@st.cache_data
 def snapshot_voters_list():
     # Read all spaces from the file
     with open("spaces.txt", "r") as file:
