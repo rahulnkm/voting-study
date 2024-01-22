@@ -135,5 +135,5 @@ def get_farcaster_posts(id):
 
 
 
-st.write(remove_duplicate_voters(snapshot_voters_list()))
+# st.write(remove_duplicate_voters(snapshot_voters_list()))
 # st.write(check_farcaster_profile(voter))
